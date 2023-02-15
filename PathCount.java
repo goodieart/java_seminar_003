@@ -1,42 +1,44 @@
 import java.util.Scanner;
-
 import javax.swing.JFrame;
-import java.util.Scanner;
-
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 
 public class PathCount {
     static final int TOOLBAR_HEIGHT = 64;
+
     public static void main(String[] args) {
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         JFrame frame = new JFrame("PathCount");
         Scanner iScanner = new Scanner(System.in);
-        int width = iScanner.nextInt();
-        int height = iScanner.nextInt();
+
+        int width = 0;
+        int height = 0;
+        String sRand = "";
+
+        try {
+            System.out.print("Введите ширину карты в клетках: ");
+            width = iScanner.nextInt();
+            System.out.print("Введите высоту карты в клетках: ");
+            height = iScanner.nextInt();
+        } catch (Exception e) {
+            System.out.println("Неверные входные данные!");
+            System.exit(1);
+        }
+
+        System.out.print("Заполнить карту случайным образом?(y/n): ");
+        while (!(sRand.equals("y") || sRand.equals("n"))) {
+            sRand = iScanner.nextLine();
+        }
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.setSize(width > 8 ? 8 * 64 : width * 64, height > 8 ? 8 * 64 + TOOLBAR_HEIGHT : height * 64 + TOOLBAR_HEIGHT);
-        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
-        //HD resolution
-        //frame.setSize(1280, 720);
-        
-        //FHD resolution
+
+        // HD resolution
+        // frame.setSize(1280, 720);
+
+        // FHD resolution
         frame.setSize(1920, 1080);
-
-        //Fullscreen mode
-        // int scrWidth = gd.getDisplayMode().getWidth();
-        // int scrHeight = gd.getDisplayMode().getHeight();
-        // frame.setAlwaysOnTop(true);
-        // frame.setLocation(0, 0);
-        // frame.setSize(scrWidth, scrHeight);
-
-        //frame.setLocation(, height);
-        frame.setUndecorated(true);
-        //frame.pack();
-        frame.add(new Main(frame, width + 2, height + 2, TOOLBAR_HEIGHT));
-        frame.setVisible(true);
         
+        frame.setUndecorated(true);
+        boolean rand = sRand.equals("y");
+        frame.add(new Main(frame, width + 2, height + 2, rand, TOOLBAR_HEIGHT));
+        frame.setVisible(true);
 
         iScanner.close();
     }
