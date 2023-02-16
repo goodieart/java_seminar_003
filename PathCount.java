@@ -22,19 +22,18 @@ public class PathCount {
             System.exit(1);
         }
 
+        if (width < 1 || height < 1) {
+            System.out.println("Ширина и высота карты не могут быть меньше 1");
+            System.exit(1);
+        }
+
         System.out.print("Заполнить карту случайным образом?(y/n): ");
         while (!(sRand.equals("y") || sRand.equals("n"))) {
             sRand = iScanner.nextLine();
         }
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // HD resolution
-        // frame.setSize(1280, 720);
-
-        // FHD resolution
-        frame.setSize(1920, 1080);
-        
+        frame.setSize(1280, 720);
         frame.setUndecorated(true);
         boolean rand = sRand.equals("y");
         frame.add(new Main(frame, width + 2, height + 2, rand, TOOLBAR_HEIGHT));
